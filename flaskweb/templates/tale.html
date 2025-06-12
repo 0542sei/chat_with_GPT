@@ -4,6 +4,87 @@
   <head>
     <meta charset="UTF-8" />
     <title>{{ tale['title'] }}</title>
+    <style>
+      body {
+        font-family: "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+        background-color: #fff8f0;
+        margin: 0;
+        padding: 2rem;
+        color: #333;
+      }
+
+      h2 {
+        text-align: center;
+        color: #2a2a2a;
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+      }
+
+      p {
+        max-width: 700px;
+        margin: 1rem auto;
+        line-height: 1.7;
+        font-size: 1.05rem;
+        background: #ffffff;
+        padding: 1rem 1.2rem;
+        border-radius: 10px;
+        box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
+      }
+
+      .form-group {
+        max-width: 500px;
+        margin: 1.5rem auto;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      label {
+        font-weight: 500;
+        display: flex;
+        flex-direction: column;
+        font-size: 1rem;
+        color: #444;
+      }
+
+      input,
+      select {
+        padding: 0.6rem;
+        font-size: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        transition: border-color 0.2s;
+      }
+
+      input:focus,
+      select:focus {
+        outline: none;
+        border-color: #ffaa33;
+      }
+
+      button {
+        padding: 0.8rem 1.2rem;
+        background-color: #ffaa33;
+        border: none;
+        border-radius: 8px;
+        color: #fff;
+        font-size: 1rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.2s, transform 0.2s;
+      }
+
+      button:hover {
+        background-color: #ff8800;
+        transform: translateY(-2px);
+      }
+
+      #error {
+        color: red;
+        margin-top: 0.5rem;
+        text-align: center;
+      }
+    </style>
     <script>
       function getParticle(name) {
         const code = name.charCodeAt(name.length - 1) - 44032;
@@ -37,27 +118,22 @@
     <p>{{ tale['content2'] }}</p>
     <p>{{ tale['content3'] }}</p>
 
-    <div style="margin-top: 1.5rem">
-      <label
-        >이름:
+    <div class="form-group">
+      <label>
+        이름:
         <input id="userName" placeholder="이름을 입력해주세요" />
       </label>
-    </div>
 
-    <div style="margin-top: 1rem">
-      <label
-        >캐릭터 선택:
+      <label>
+        캐릭터 선택:
         <select id="selectedCharacter">
           {% for ch in tale['characters'].split(',') %}
           <option value="{{ ch.strip() }}">{{ ch.strip() }}</option>
           {% endfor %}
         </select>
       </label>
-    </div>
 
-    <div style="margin-top: 1rem">
       <button onclick="submit({{ tale['taleId'] }})">이야기 시작하기</button>
-      <p id="error" style="color: red"></p>
     </div>
   </body>
 </html>

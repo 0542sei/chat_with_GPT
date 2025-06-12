@@ -4,15 +4,63 @@
   <head>
     <meta charset="UTF-8" />
     <title>동화 목록</title>
+    <style>
+      body {
+        font-family: "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+        background-color: #f9f9f9;
+        margin: 0;
+        padding: 2rem;
+      }
+
+      h1 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 2rem;
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      li {
+        background: #ffffff;
+        margin-bottom: 1rem;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s, box-shadow 0.2s;
+      }
+
+      li:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+
+      a {
+        display: block;
+        padding: 1rem 1.5rem;
+        text-decoration: none;
+        color: #1a1a1a;
+        font-size: 1.1rem;
+        font-weight: 500;
+        transition: color 0.2s;
+      }
+
+      a:hover {
+        color: #0077cc;
+      }
+    </style>
   </head>
   <body>
     <h1>동화 목록</h1>
     <ul>
       {% for tale in tales %} {% if tale and 'taleId' in tale %}
       <li>
-        <a href="{{ url_for('show_tale', tale_id=tale['taleId']) }}"
-          >{{ tale['title'] }}</a
-        >
+        <a href="{{ url_for('show_tale', tale_id=tale['taleId']) }}">
+          {{ tale['title'] }}
+        </a>
       </li>
       {% endif %} {% endfor %}
     </ul>
