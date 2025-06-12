@@ -1,0 +1,33 @@
+# Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+.env
+# Virtual environments
+venv/
+env/
+ENV/
+Include/
+Lib/
+Scripts/
+pyvenv/
+.env
+# Django stuff:
+*.log
+*.pot
+*.pyc
+*.pyo
+*.pyd
+db.sqlite3
+media/
+
+# VS Code or other IDE settings
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Static files collected (if managed via collectstatic)
+staticfiles/

@@ -1,0 +1,63 @@
+<!-- templates/tale.html -->
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>{{ tale['title'] }}</title>
+    <script>
+      function getParticle(name) {
+        const code = name.charCodeAt(name.length - 1) - 44032;
+        return code % 28 === 0 ? "와" : "과";
+      }
+
+      function submit(taleId) {
+        const userName = document.getElementById("userName").value.trim();
+        const character = document.getElementById("selectedCharacter").value;
+        const errorEl = document.getElementById("error");
+
+        if (!userName || !character) {
+          errorEl.textContent = "이름과 캐릭터를 모두 입력해주세요.";
+          return;
+        }
+
+        alert(
+          `${userName}님!\n${character}${getParticle(
+            character
+          )} 이야기하러 떠나볼까요~?`
+        );
+        window.location.href = `/chat?userName=${encodeURIComponent(
+          userName
+        )}&character=${encodeURIComponent(character)}&taleId=${taleId}`;
+      }
+    </script>
+  </head>
+  <body>
+    <h2>{{ tale['title'] }}</h2>
+    <p>{{ tale['content1'] }}</p>
+    <p>{{ tale['content2'] }}</p>
+    <p>{{ tale['content3'] }}</p>
+
+    <div style="margin-top: 1.5rem">
+      <label
+        >이름:
+        <input id="userName" placeholder="이름을 입력해주세요" />
+      </label>
+    </div>
+
+    <div style="margin-top: 1rem">
+      <label
+        >캐릭터 선택:
+        <select id="selectedCharacter">
+          {% for ch in tale['characters'].split(',') %}
+          <option value="{{ ch.strip() }}">{{ ch.strip() }}</option>
+          {% endfor %}
+        </select>
+      </label>
+    </div>
+
+    <div style="margin-top: 1rem">
+      <button onclick="submit({{ tale['taleId'] }})">이야기 시작하기</button>
+      <p id="error" style="color: red"></p>
+    </div>
+  </body>
+</html>
